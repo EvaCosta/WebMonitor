@@ -36,30 +36,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         /************** cria um NotificationChanel *********/
-
         this.createNotificationChannel();
 
         /************* cria um AlarmManager ***************/
-
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-        //cria a intenção
-        Intent alarmIntent = new Intent(this, Notifica.class);
-        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
-
-        //agenda o alarme de 60 em 60 seg
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Log.i("Alarme", "setInexactRepeating");
-            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 0, 10000, pendingIntent);
-            //Log.i("Alarme", "setAndAllowWhileIdle");
-            //alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, 0, pendingIntent);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Log.i("Alarme", "setExact");
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, 0, pendingIntent);
-        } else {
-            Log.i("Alarme", "set");
-            alarmManager.set(AlarmManager.RTC_WAKEUP, 0, pendingIntent);
-        }
+        this.createTask();
     }
 
     private void createNotificationChannel() {
@@ -76,5 +56,16 @@ public class MainActivity extends AppCompatActivity {
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+    }
+
+    private void createTask(){
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        Intent alarmIntent = new Intent(this, Notifica.class);
+        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
+
+        //agenda o alarme de 10 em 10 seg para executar o método onReceive da classe Notifica
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 0, 10000, pendingIntent);
+
     }
 }
