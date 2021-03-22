@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 
 import com.example.webmonitor.R;
@@ -43,16 +42,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "webmonitor";
             String description = "descrição do canal do webmonitor";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("123", name, importance);
+            NotificationChannel channel = new NotificationChannel("WebMonitor", name, NotificationManager.IMPORTANCE_DEFAULT);
             channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
+
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
@@ -61,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
     private void createTask(){
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-        Intent alarmIntent = new Intent(this, Notifica.class);
+        Intent alarmIntent = new Intent(this, BackgroundTask.class);
         pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
 
-        //agenda o alarme de 10 em 10 seg para executar o método onReceive da classe Notifica
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 0, 10000, pendingIntent);
+        //agenda uma tarefa para rodar de 1 em 1 minuto e verificar qual site deve ser verificado
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 0, 60000, pendingIntent);
 
     }
 }

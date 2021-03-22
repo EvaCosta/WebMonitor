@@ -20,7 +20,7 @@
         </activity>
         
         <receiver
-            android:name="com.webmonitor.app.Notifica"
+            android:name="com.webmonitor.app.BackgroundTask"
             android:directBootAware="true"
             android:enabled="true"
             android:exported="true">
@@ -31,7 +31,7 @@
         </receiver>
 
         <service
-            android:name="com.webmonitor.app.NotificaService"
+            android:name="com.webmonitor.app.TaskService"
             android:enabled="true"
             android:exported="false"
             android:process=":remote" />

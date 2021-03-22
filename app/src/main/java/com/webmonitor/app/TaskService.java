@@ -9,16 +9,16 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-public class NotificaService  extends IntentService {
+public class TaskService extends IntentService {
 
-    public NotificaService(){
+    public TaskService(){
         super("NotificaService");
     }
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Log.i("Alarme", "NotificaService");
-        Intent alarmIntent = new Intent(this, Notifica.class);
+        Intent alarmIntent = new Intent(this, BackgroundTask.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 0, 10000, pendingIntent);
     }
