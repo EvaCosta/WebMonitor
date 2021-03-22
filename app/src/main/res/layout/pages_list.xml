@@ -37,7 +37,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginBottom="8dp"
         android:text="sdsd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,8 +48,8 @@
         style="@android:style/Widget.Holo.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="39dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginBottom="15dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/delete_page"
@@ -62,23 +61,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/edit_btn"
-        style="@android:style/Widget.Holo.Button.Borderless"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="78dp"
-        android:layout_marginBottom="15dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/edit_page"
-        android:gravity="end"
-        android:paddingTop="5dip"
-        android:scaleType="center"
-        android:src="@drawable/ic_edit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="19dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Última modificação em: 22/03/2021 20:34"
+        app:layout_constraintBottom_toTopOf="@+id/main_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subtitle"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
