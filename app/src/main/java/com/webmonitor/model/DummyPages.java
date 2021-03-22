@@ -9,7 +9,7 @@ public class DummyPages {
 
     public static List<Page> data  = Arrays.asList(
 
-            new Page("Google", "google.com", "link.com", "22/03/2021"),
+            new Page("Resultado da Pesquisa do Google", "google.com", "link.com", "22/03/2021"),
             new Page("Instagram", "google.com", "link.com", "22/03/2021"),
             new Page("Facebook", "google.com", "link.com", "22/03/2021"),
             new Page("Gmail", "google.com", "link.com", "22/03/2021"));
