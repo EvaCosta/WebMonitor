@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.example.webmonitor.R;
@@ -35,23 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         /************** cria um NotificationChanel *********/
-        this.createNotificationChannel();
+        AlertNotification.createNotificationChannel(this);
 
-        /************* cria um AlarmManager ***************/
+        /**** inicia uma Tarefa para rodar o AlarmManager ***/
         this.createTask();
     }
 
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "webmonitor";
-            String description = "descrição do canal do webmonitor";
-            NotificationChannel channel = new NotificationChannel("WebMonitor", name, NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription(description);
-
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
 
     private void createTask(){
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -60,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
         pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
 
         //agenda uma tarefa para rodar de 1 em 1 minuto e verificar qual site deve ser verificado
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 0, 60000, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 60000, pendingIntent);
 
+        Log.i("WebMonitor", "Tarefa Criada!");
     }
 }

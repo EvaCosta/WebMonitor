@@ -2,27 +2,38 @@ package com.webmonitor.model;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Page {
 
+    private Long id;
     private String title;
     private String url;
     private String imageSource;
     private String date;
     private Long timeInterval; //minutos
-    private Long lastTime;
+    private Date lastTime;
 
 
-    public Page(String title, String url, String imageSource, String date, Long timeInterval) {
+    public Page(Long id, String title, String url, String imageSource, String date, Long timeInterval) {
+        this.id = id;
         this.title = title;
         this.url = url;
         this.imageSource = imageSource;
         this.date = date;
         this.timeInterval = timeInterval;
-        this.lastTime = Calendar.getInstance().getTimeInMillis();
+        this.lastTime = Calendar.getInstance().getTime();
     }
 
     public Page() { }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -60,7 +71,7 @@ public class Page {
 
     public void setTimeInterval(Long timeInterval) { this.timeInterval = timeInterval; }
 
-    public Long getLastTime(){ return lastTime; }
+    public Date getLastTime(){ return lastTime; }
 
-    public void setLastTime(Long lastTime){ this.lastTime = lastTime; }
+    public void setLastTime(Date lastTime){ this.lastTime = lastTime; }
 }

@@ -16,10 +16,10 @@ public class TaskService extends IntentService {
     }
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
+        Log.i("Web Monitor", "Criou a tarefa pelo serviço");
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Log.i("Alarme", "NotificaService");
         Intent alarmIntent = new Intent(this, BackgroundTask.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 0, 10000, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 60000, pendingIntent);
     }
 }
