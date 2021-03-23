@@ -22,7 +22,11 @@ public class MainActivity extends AppCompatActivity {
 
     ListView list;
 
+    private static boolean activityVisible;
 
+    public static boolean isActivityVisible() {
+        return activityVisible || false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         list=(ListView)findViewById(R.id.recyclerView);
         list.setAdapter(adapter);
 
-
         startAlarmBroadcast(this);
 
     }
@@ -42,8 +45,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         clearNotifications(this);
+        activityVisible = true;
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        activityVisible = false;
+    }
 
     private void clearNotifications(Context context){
         AlertNotification.removeNotifications(this);

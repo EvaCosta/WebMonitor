@@ -60,7 +60,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     private void readyToCheck(Page page){
 
         boolean wasModified = checkPage(page);
-        if(wasModified){
+        if(!MainActivity.isActivityVisible() && wasModified){
             AlertNotification.sendNotification(context, intent, page);
         }
     }
