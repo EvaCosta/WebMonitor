@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     ListView list;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,14 +34,16 @@ public class MainActivity extends AppCompatActivity {
         list.setAdapter(adapter);
 
 
-
-        //Elimina as notificações quando o app é aberto
-        clearNotifications(this);
-
-        //Chama o BroadcastReceiver para iniciar o AlarmMonitor
         startAlarmBroadcast(this);
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        clearNotifications(this);
+    }
+
 
     private void clearNotifications(Context context){
         AlertNotification.removeNotifications(this);
