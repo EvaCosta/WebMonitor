@@ -20,21 +20,17 @@
         </activity>
         
         <receiver
-            android:name="com.webmonitor.app.BackgroundTask"
+            android:name="com.webmonitor.app.AutoStartAlarmReceiver"
             android:directBootAware="true"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <service
-            android:name="com.webmonitor.app.TaskService"
-            android:enabled="true"
-            android:exported="false"
-            android:process=":remote" />
+        <receiver android:name="com.webmonitor.app.AlarmReceiver"
+            android:enabled="true"/>
 
     </application>
 

@@ -22,8 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
     ListView list;
 
-    AlarmManager alarmManager;
-    PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,23 +33,24 @@ public class MainActivity extends AppCompatActivity {
         list.setAdapter(adapter);
 
 
-        /************** cria um NotificationChanel *********/
-        AlertNotification.createNotificationChannel(this);
 
-        /**** inicia uma Tarefa para rodar o AlarmManager ***/
-        this.createTask();
+        //Elimina as notificações quando o app é aberto
+        clearNotifications(this);
+
+        //Chama o BroadcastReceiver para iniciar o AlarmMonitor
+        startAlarmBroadcast(this);
+
+    }
+
+    private void clearNotifications(Context context){
+        AlertNotification.removeNotifications(this);
+    }
+
+    private void startAlarmBroadcast(Context context){
+        Log.i("WebMonitor", "MainActivity.startAlarmBroadcast");
+        Intent intent = new Intent(context, AutoStartAlarmReceiver.class);
+        context.sendBroadcast(intent);
     }
 
 
-    private void createTask(){
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-        Intent alarmIntent = new Intent(this, BackgroundTask.class);
-        pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, 0);
-
-        //agenda uma tarefa para rodar de 1 em 1 minuto e verificar qual site deve ser verificado
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 60000, pendingIntent);
-
-        Log.i("WebMonitor", "Tarefa Criada!");
-    }
 }

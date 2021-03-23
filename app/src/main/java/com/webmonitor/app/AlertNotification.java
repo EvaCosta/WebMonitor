@@ -16,21 +16,27 @@ import com.webmonitor.model.Page;
 public class AlertNotification {
 
 
-    public static void createNotificationChannel(Activity activity) {
+    private static void createNotificationChannel(Context context) {
+
+        Log.i("WebMonitor", "AlertNotification.createNotificationChannel");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "webmonitor";
             String description = "descrição do canal do webmonitor";
             NotificationChannel channel = new NotificationChannel("WebMonitor", name, NotificationManager.IMPORTANCE_DEFAULT);
             channel.setDescription(description);
 
-            NotificationManager notificationManager = activity.getSystemService(NotificationManager.class);
+            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
 
-            Log.i("WebMonitor", "Canal Criado");
         }
     }
 
     public static void sendNotification(Context context, Intent intent, Page page){
+
+        //Não cria outro canal se já existir o mesmo
+        createNotificationChannel(context);
+
+        Log.i("WebMonitor", "AlertNotification.sendNotification");
 
         Intent newIntent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -46,7 +52,13 @@ public class AlertNotification {
         NotificationManager notManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notManager.notify(page.getTimeInterval().intValue(), notBuilder.build());
 
-        Log.i("WebMonitor", "Notificação enviada!");
+    }
+
+    public static void removeNotifications(Context context){
+        Log.i("WebMonitor", "AlertNotification.sendNotification");
+
+        NotificationManager notManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notManager.cancelAll();
     }
 
 }
