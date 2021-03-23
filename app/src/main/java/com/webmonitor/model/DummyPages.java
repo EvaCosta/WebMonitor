@@ -7,7 +7,7 @@ import java.util.List;
 //PARA TESTE
 public class DummyPages {
 
-    public static List<Page> data  = Arrays.asList(
+    public static List<Page> data  = new ArrayList<Page>(); /*Arrays.asList(
 
             new Page(1L,"Resultado da Pesquisa do Google", "google.com", "link.com", 1L*60000, true),
             new Page(2L,"Instagram", "google.com", "link.com", 2L*60000, false),
@@ -17,6 +17,6 @@ public class DummyPages {
             new Page(6L, "Uol", "google.com", "link.com", 6L*60000, false),
             new Page(7L, "Terra", "google.com", "link.com", 7L*60000, true),
             new Page(8L, "Gmail", "google.com", "link.com",  8L*60000, false)
-    );
+    );*/
 
 }
