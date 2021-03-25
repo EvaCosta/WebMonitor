@@ -10,6 +10,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -68,6 +69,21 @@ public class MainActivity extends AppCompatActivity {
         Log.i("WebMonitor", "MainActivity.startAlarmBroadcast");
         Intent intent = new Intent(context, AutoStartAlarmReceiver.class);
         context.sendBroadcast(intent);
+    }
+
+    public void atualizaSite(View view){
+        Intent intent = new Intent(this, AtualizaSite.class);
+        if (intent != null){
+            startActivity(intent);
+        }
+    }
+
+    public void abreSite(View view){
+        String url = "http://www.google.com";
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(intent);
+
     }
 
     public void exibirConfirmacao(View view){
