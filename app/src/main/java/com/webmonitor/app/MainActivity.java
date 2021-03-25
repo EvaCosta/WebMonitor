@@ -11,7 +11,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.webmonitor.R;
 import com.webmonitor.adapter.AdapterPage;
@@ -88,5 +90,9 @@ public class MainActivity extends AppCompatActivity {
         context.sendBroadcast(intent);
     }
 
-
+    public void teste(View view) {
+        Intent intent = new Intent(this, IncludeActivity.class);
+        if (intent != null)
+            startActivity(intent);
+    }
 }
