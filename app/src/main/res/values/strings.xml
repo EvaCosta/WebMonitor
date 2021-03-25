@@ -4,4 +4,6 @@
     <string name="delete_page">delete page</string>
     <string name="edit_page">edit page</string>
     <string name="confirma_exclusao">Tem certeza que deseja excluir este item?</string>
+    <string name="dummy">dummy</string>
+    <string name="dummy_last_mod">Última modificação em: 22/03/2021 20:34</string>
 </resources>

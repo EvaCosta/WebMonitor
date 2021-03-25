@@ -40,7 +40,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     /**** Aguardando serviço de persistencia *******/
     private List<Page> getPages(){
         //TODO pegar as "Pages" do serviço de persistência
-        return DummyPages.data;
+        return new DummyPages().getData();
     }
 
     private void selectPagesToCheck(List<Page> pages){

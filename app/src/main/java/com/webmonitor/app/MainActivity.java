@@ -17,11 +17,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.webmonitor.R;
 import com.webmonitor.adapter.AdapterPage;
 import com.webmonitor.model.DummyPages;
+
+import java.io.File;
+import java.io.FileReader;
+import java.net.URL;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private static boolean activityVisible;
 
     public static boolean isActivityVisible() {
-        return activityVisible || false;
+        return activityVisible;
     }
 
     @Override
@@ -39,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AdapterPage adapter=new AdapterPage(this, DummyPages.data);
+        AdapterPage adapter=new AdapterPage(this, new DummyPages().getData());
         list=(ListView)findViewById(R.id.recyclerView);
         list.setAdapter(adapter);
 
@@ -69,44 +74,6 @@ public class MainActivity extends AppCompatActivity {
         Log.i("WebMonitor", "MainActivity.startAlarmBroadcast");
         Intent intent = new Intent(context, AutoStartAlarmReceiver.class);
         context.sendBroadcast(intent);
-    }
-
-    public void atualizaSite(View view){
-        Intent intent = new Intent(this, AtualizaSite.class);
-        if (intent != null){
-            startActivity(intent);
-        }
-    }
-
-    public void abreSite(View view){
-        String url = "http://www.google.com";
-
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(intent);
-
-    }
-
-    public void exibirConfirmacao(View view){
-        ImageButton btn = (ImageButton) findViewById(R.id.delete_btn);
-
-        AlertDialog.Builder box = new AlertDialog.Builder(this);
-        box.setTitle("Excluir");
-        box.setIcon(android.R.drawable.ic_menu_delete);
-        box.setMessage("Tem certeza que deseja excluir este item?");
-
-        box.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MainActivity.this, "Item excluído", Toast.LENGTH_LONG).show();
-            }
-        });
-        box.setNegativeButton("Não", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MainActivity.this, "Item excluído", Toast.LENGTH_LONG).show();
-            }
-        });
-        box.show();
     }
 
 
