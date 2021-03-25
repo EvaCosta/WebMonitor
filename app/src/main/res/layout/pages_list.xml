@@ -54,6 +54,7 @@
         android:adjustViewBounds="true"
         android:contentDescription="@string/delete_page"
         android:gravity="end"
+        android:onClick="exibirConfirmacao"
         android:paddingTop="5dip"
         android:scaleType="center"
         android:src="@drawable/ic_delete"

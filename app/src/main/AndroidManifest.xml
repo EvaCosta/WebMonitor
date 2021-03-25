@@ -15,10 +15,11 @@
         <activity android:name="com.webmonitor.app.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <receiver
             android:name="com.webmonitor.app.AutoStartAlarmReceiver"
             android:directBootAware="true"
@@ -28,10 +29,9 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
-        <receiver android:name="com.webmonitor.app.AlarmReceiver"
-            android:enabled="true"/>
-
+        <receiver
+            android:name="com.webmonitor.app.AlarmReceiver"
+            android:enabled="true" />
     </application>
 
 </manifest>
