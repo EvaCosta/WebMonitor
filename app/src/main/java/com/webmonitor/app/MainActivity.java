@@ -27,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
 
     ListView list;
 
+    private static boolean activityVisible;
+
+    public static boolean isActivityVisible() {
+        return activityVisible || false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +43,21 @@ public class MainActivity extends AppCompatActivity {
         list.setAdapter(adapter);
 
         //Elimina as notificações quando o app é aberto
-        clearNotifications(this);
-
-        //Chama o BroadcastReceiver para iniciar o AlarmMonitor
         startAlarmBroadcast(this);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        clearNotifications(this);
+        activityVisible = true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        activityVisible = false;
     }
 
     private void clearNotifications(Context context){

@@ -1,6 +1,5 @@
 package com.webmonitor.model;
 
-import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,19 +9,19 @@ public class Page {
     private String title;
     private String url;
     private String imageSource;
-    private String date;
-    private Long timeInterval; //minutos
+    private Long timeInterval; //miliseconds
     private Date lastTime;
+    private boolean allowMobileConnection;
 
 
-    public Page(Long id, String title, String url, String imageSource, String date, Long timeInterval) {
+    public Page(Long id, String title, String url, String imageSource, Long timeInterval, boolean allowMobileConnection) {
         this.id = id;
         this.title = title;
         this.url = url;
         this.imageSource = imageSource;
-        this.date = date;
         this.timeInterval = timeInterval;
         this.lastTime = Calendar.getInstance().getTime();
+        this.allowMobileConnection = allowMobileConnection;
     }
 
     public Page() { }
@@ -59,14 +58,6 @@ public class Page {
         this.imageSource = imageSource;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public Long getTimeInterval(){ return timeInterval; }
 
     public void setTimeInterval(Long timeInterval) { this.timeInterval = timeInterval; }
@@ -74,4 +65,8 @@ public class Page {
     public Date getLastTime(){ return lastTime; }
 
     public void setLastTime(Date lastTime){ this.lastTime = lastTime; }
+
+    public boolean getAllowMobileConnection(){ return this.allowMobileConnection; }
+
+    public void setAllowMobileConnection(boolean allowMobileConnection) { this.allowMobileConnection = allowMobileConnection; }
 }
