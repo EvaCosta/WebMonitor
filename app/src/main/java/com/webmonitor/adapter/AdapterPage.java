@@ -20,6 +20,7 @@ import com.webmonitor.model.Page;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AdapterPage extends ArrayAdapter<Page> {
     private Activity activity;
@@ -48,19 +49,22 @@ public class AdapterPage extends ArrayAdapter<Page> {
         TextView titleText = rowView.findViewById(R.id.main_title);
         TextView subtitleText = rowView.findViewById(R.id.subtitle);
         TextView idText = rowView.findViewById(R.id.id_text);
-        TextView datetime = rowView.findViewById(R.id.datetime);
+        TextView lastChange = rowView.findViewById(R.id.lastChange);
 
         ImageButton btnDelete = rowView.findViewById(R.id.delete_btn);
         ImageButton btnEdit = rowView.findViewById(R.id.edit_btn);
 
+        String lastChangeTxt = String.format("%s %s", activity.getString(R.string.dummy_last_mod),
+                dateFormat(pagesList.get(position).getLastTime()));
+
         titleText.setText(pagesList.get(position).getTitle());
         subtitleText.setText(pagesList.get(position).getUrl());
         idText.setText(pagesList.get(position).getId().toString());
-        datetime.setText(dateFormat(pagesList.get(position).getLastTime()));
+        lastChange.setText(lastChangeTxt);
 
         titleText.setOnClickListener(v -> openPage(subtitleText));
         subtitleText.setOnClickListener(v -> openPage(subtitleText));
-        datetime.setOnClickListener(v -> openPage(subtitleText));
+        lastChange.setOnClickListener(v -> openPage(subtitleText));
         btnDelete.setOnClickListener(v -> showDeleteDialog(position, String.valueOf(idText.getText())));
         btnEdit.setOnClickListener(v -> editPage());
 
@@ -116,10 +120,10 @@ public class AdapterPage extends ArrayAdapter<Page> {
     }
 
     public String dateFormat(Date date){
-        String data = new SimpleDateFormat("dd/MM/yyyy").format(date);
-        String hora = new SimpleDateFormat("HH:mm:ss").format(date);
 
-        return data + " " + hora;
+        System.out.println(date);
+
+        return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()).format(date);
     }
 
     private void showNoPagesMessage(){
