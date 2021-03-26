@@ -12,16 +12,17 @@ public class Database {
     private static final String DATABASE_NAME = "web_monitor";
 
     private static final int DATABASE_ACCESS = 0;
-    private static final String SQL_STRUCT = "CREATE TABLE IF NOT EXISTS pages(id_ INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL,  url TEXT NOT NULL,  imageSource TEXT NOT NULL, timeInterval INTEGER DEFAULT 10000 NOT NULL, allowMobileConnection INTEGER NOT NULL, percentage INTEGER DEFAULT 1 NOT NULL, lastCheck INTEGER NOT NULL, content TEXT); ";
-    private static final String SQL_INSERT = "INSERT INTO pages (title, imageSource, url, timeInterval, allowMobileConnection, percentage, lastCheck, content) VALUES ('%s', '%s', '%s', '%d', '%d', '%d', '%d', '%s');";
+    private static final String SQL_STRUCT = "CREATE TABLE IF NOT EXISTS pages(id_ INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL,  url TEXT NOT NULL,  imageSource TEXT NOT NULL, timeInterval INTEGER DEFAULT 10000 NOT NULL, allowMobileConnection INTEGER NOT NULL, percentage INTEGER DEFAULT 1 NOT NULL, lastTime INTEGER NOT NULL, content TEXT, lastUpdate INTEGER NOT NULL); ";
+    private static final String SQL_INSERT = "INSERT INTO pages (title, imageSource, url, timeInterval, allowMobileConnection, percentage, lastTime, content, lastUpdate) VALUES ('%s', '%s', '%s', '%d', '%d', '%d', '%d', '%s', '%d');";
     private static final String SQL_SELECT_ALL = "SELECT * FROM pages;";
     private static final String SQL_CLEAR = "DROP TABLE IF EXISTS pages;";
-    private static final String SQL_UPDATE = "UPDATE pages SET title = %s, imageSource = %s, url = %s, timeInterval = %d, allowMobileConnection = %d, percentage = %d, lastCheck = %d, content = %s WHERE id_ = %d;";
-    private static final String SQL_UPDATE_LAST_CHECK = "UPDATE pages SET lastCheck = %d WHERE id_ = %d;";
+    private static final String SQL_UPDATE = "UPDATE pages SET title = %s, imageSource = %s, url = %s, timeInterval = %d, allowMobileConnection = %d, percentage = %d, lastTime = %d, content = %s WHERE id_ = %d;";
+    private static final String SQL_UPDATE_LAST_CHECK = "UPDATE pages SET lastTime = %d WHERE id_ = %d;";
+    private static final String SQL_UPDATE_LAST_UPDATE = "UPDATE pages SET lastUpdate = %d WHERE id_ = %d;";
     private static final String SQL_DELETE = "DELETE FROM pages WHERE id_ = %d;";
     private SQLiteDatabase database;
     private Cursor cursor;
-    private int indexID, indexTitle, indexUrl, indexImageSource, indexTimeInterval, indexAllowMobileConnection, indexPercentage, indexLastCheck;
+    private int indexID, indexTitle, indexUrl, indexImageSource, indexTimeInterval, indexAllowMobileConnection, indexPercentage, indexLastTime, indexContent, indexLastUpdate;
 
     public Database(Context context) {
         database = context.openOrCreateDatabase(DATABASE_NAME, DATABASE_ACCESS, null);
@@ -46,7 +47,8 @@ public class Database {
                 page.getAllowMobileConnection() == true ? 1 : 0,
                 page.getPercentage(),
                 page.getLastTime().getTime(),
-                page.getContent()
+                page.getContent(),
+                page.getLastUpdate().getTime()
         );
         database.execSQL(query);
     }
@@ -66,7 +68,7 @@ public class Database {
         database.execSQL(query);
     }
 
-    public void updateLastCheck(long pageId, Date lastCheck){
+    public void updateLastTime(long pageId, Date lastCheck){
         String query = String.format(
                 SQL_UPDATE_LAST_CHECK,
                 lastCheck.getTime(),
@@ -75,10 +77,28 @@ public class Database {
         database.execSQL(query);
     }
 
-    public void updateLastCheck(Page page){
+    public void updateLastTime(Page page){
         String query = String.format(
                 SQL_UPDATE_LAST_CHECK,
-                page.getLastCheck().getTime(),
+                page.getLastTime().getTime(),
+                page.getId()
+        );
+        database.execSQL(query);
+    }
+
+    public void updateLastUpdate(long pageId, Date lastUpdate){
+        String query = String.format(
+                SQL_UPDATE_LAST_UPDATE,
+                lastUpdate.getTime(),
+                pageId
+        );
+        database.execSQL(query);
+    }
+
+    public void updateLastUpdate(Page page){
+        String query = String.format(
+                SQL_UPDATE_LAST_UPDATE,
+                page.getLastUpdate().getTime(),
                 page.getId()
         );
         database.execSQL(query);
@@ -114,8 +134,9 @@ public class Database {
             indexTimeInterval = cursor.getColumnIndex("timeInterval");
             indexAllowMobileConnection = cursor.getColumnIndex("allowMobileConnection");
             indexPercentage = cursor.getColumnIndex("percentage");
-            indexLastCheck = cursor.getColumnIndex("lastCheck");
+            indexLastTime = cursor.getColumnIndex("lastTime");
             indexContent = cursor.getColumnIndex("content");
+            indexLastUpdate = cursor.getColumnIndex("lastUpdate");
 
             do {
                 page = new Page();
@@ -126,8 +147,9 @@ public class Database {
                 page.setTimeInterval(cursor.getLong(indexTimeInterval));
                 page.setAllowMobileConnection(cursor.getInt(indexAllowMobileConnection) == 1 ? true : false);
                 page.setPercentage(cursor.getInt(indexPercentage));
-                page.setLastCheck(new Date(cursor.getLong(indexLastCheck) * 1000));
+                page.setLastTime(new Date(cursor.getLong(indexLastTime) * 1000));
                 page.setContent(cursor.getString(indexContent));
+                page.setLastUpdate(new Date(cursor.getLong(indexLastUpdate) * 1000));
                 pages.add(page);
             } while (cursor.moveToNext());
         }
