@@ -12,16 +12,16 @@ public class Database {
     private static final String DATABASE_NAME = "web_monitor";
 
     private static final int DATABASE_ACCESS = 0;
-    private static final String SQL_STRUCT = "CREATE TABLE IF NOT EXISTS pages(id_ INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL,  url TEXT NOT NULL,  imageSource TEXT NOT NULL, timeInterval INTEGER DEFAULT 10000 NOT NULL, allowMobileConnection INTEGER NOT NULL, percentage INTEGER DEFAULT 1 NOT NULL, lastTime INTEGER NOT NULL); ";
-    private static final String SQL_INSERT = "INSERT INTO pages (title, imageSource, url, timeInterval, allowMobileConnection, percentage, lastTime) VALUES ('%s', '%s', '%s', '%d', '%d', '%d', '%d');";
+    private static final String SQL_STRUCT = "CREATE TABLE IF NOT EXISTS pages(id_ INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL,  url TEXT NOT NULL,  imageSource TEXT NOT NULL, timeInterval INTEGER DEFAULT 10000 NOT NULL, allowMobileConnection INTEGER NOT NULL, percentage INTEGER DEFAULT 1 NOT NULL, lastCheck INTEGER NOT NULL, content TEXT); ";
+    private static final String SQL_INSERT = "INSERT INTO pages (title, imageSource, url, timeInterval, allowMobileConnection, percentage, lastCheck, content) VALUES ('%s', '%s', '%s', '%d', '%d', '%d', '%d', '%s');";
     private static final String SQL_SELECT_ALL = "SELECT * FROM pages;";
     private static final String SQL_CLEAR = "DROP TABLE IF EXISTS pages;";
-    private static final String SQL_UPDATE = "UPDATE pages SET title = %s, imageSource = %s, url = %s, timeInterval = %d, allowMobileConnection = %d, percentage = %d, lastTime = %d WHERE id_ = %d;";
-    private static final String SQL_UPDATE_LAST_TIME = "UPDATE pages SET lastTime = %d WHERE id_ = %d;";
+    private static final String SQL_UPDATE = "UPDATE pages SET title = %s, imageSource = %s, url = %s, timeInterval = %d, allowMobileConnection = %d, percentage = %d, lastCheck = %d, content = %s WHERE id_ = %d;";
+    private static final String SQL_UPDATE_LAST_CHECK = "UPDATE pages SET lastCheck = %d WHERE id_ = %d;";
     private static final String SQL_DELETE = "DELETE FROM pages WHERE id_ = %d;";
     private SQLiteDatabase database;
     private Cursor cursor;
-    private int indexID, indexTitle, indexUrl, indexImageSource, indexTimeInterval, indexAllowMobileConnection, indexPercentage, indexLastTime;
+    private int indexID, indexTitle, indexUrl, indexImageSource, indexTimeInterval, indexAllowMobileConnection, indexPercentage, indexLastCheck;
 
     public Database(Context context) {
         database = context.openOrCreateDatabase(DATABASE_NAME, DATABASE_ACCESS, null);
@@ -45,7 +45,8 @@ public class Database {
                 page.getTimeInterval(),
                 page.getAllowMobileConnection() == true ? 1 : 0,
                 page.getPercentage(),
-                page.getLastTime().getTime()
+                page.getLastTime().getTime(),
+                page.getContent()
         );
         database.execSQL(query);
     }
@@ -65,19 +66,19 @@ public class Database {
         database.execSQL(query);
     }
 
-    public void updateLastTime(long pageId, Date lastTime){
+    public void updateLastCheck(long pageId, Date lastCheck){
         String query = String.format(
-                SQL_UPDATE_LAST_TIME,
-                lastTime.getTime(),
+                SQL_UPDATE_LAST_CHECK,
+                lastCheck.getTime(),
                 pageId
         );
         database.execSQL(query);
     }
 
-    public void updateLastTime(Page page){
+    public void updateLastCheck(Page page){
         String query = String.format(
-                SQL_UPDATE_LAST_TIME,
-                page.getLastTime().getTime(),
+                SQL_UPDATE_LAST_CHECK,
+                page.getLastCheck().getTime(),
                 page.getId()
         );
         database.execSQL(query);
@@ -113,7 +114,8 @@ public class Database {
             indexTimeInterval = cursor.getColumnIndex("timeInterval");
             indexAllowMobileConnection = cursor.getColumnIndex("allowMobileConnection");
             indexPercentage = cursor.getColumnIndex("percentage");
-            indexLastTime = cursor.getColumnIndex("lastTime");
+            indexLastCheck = cursor.getColumnIndex("lastCheck");
+            indexContent = cursor.getColumnIndex("content");
 
             do {
                 page = new Page();
@@ -124,7 +126,8 @@ public class Database {
                 page.setTimeInterval(cursor.getLong(indexTimeInterval));
                 page.setAllowMobileConnection(cursor.getInt(indexAllowMobileConnection) == 1 ? true : false);
                 page.setPercentage(cursor.getInt(indexPercentage));
-                page.setLastTime(new Date(cursor.getLong(indexLastTime) * 1000));
+                page.setLastCheck(new Date(cursor.getLong(indexLastCheck) * 1000));
+                page.setContent(cursor.getString(indexContent));
                 pages.add(page);
             } while (cursor.moveToNext());
         }
