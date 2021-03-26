@@ -16,6 +16,7 @@ public class Page {
     private Date lastTime;
     private Date lastUpdate;
     private boolean allowMobileConnection;
+    private String httpRequestMethod;
 
 
     public Page(Long id, String title, String url, String imageSource, Long timeInterval, boolean allowMobileConnection, Integer percentage) {
@@ -40,6 +41,20 @@ public class Page {
         this.percentage = percentage;
         this.content = content;
     }
+
+    public Page(Long id, String title, String url, String imageSource, String content, Long timeInterval, boolean allowMobileConnection, Integer percentage, String httpRequestMethod) {
+        this.id = id;
+        this.title = title;
+        this.url = url;
+        this.imageSource = imageSource;
+        this.timeInterval = timeInterval;
+        this.lastTime = Calendar.getInstance().getTime();
+        this.allowMobileConnection = allowMobileConnection;
+        this.percentage = percentage;
+        this.content = content;
+        this.httpRequestMethod = httpRequestMethod;
+    }
+
 
     public Page() { }
 
@@ -106,6 +121,14 @@ public class Page {
     }
 
     public void setAllowMobileConnection(boolean allowMobileConnection) { this.allowMobileConnection = allowMobileConnection; }
+
+    public String getHttpRequestMethod() {
+        return httpRequestMethod;
+    }
+
+    public void setHttpRequestMethod(String httpRequestMethod) {
+        this.httpRequestMethod = httpRequestMethod;
+    }
 
     @Override
     public boolean equals(Object o) {
