@@ -13,6 +13,10 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.webmonitor.db.Database;
 import com.webmonitor.model.Page;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+import java.io.IOException;
 import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +30,7 @@ public class IncludeActivity extends AppCompatActivity {
     }
 
     /// Faz o cadastro da página no banco.
-    public void includePage(View view) {
+    public void includePage(View view) throws IOException {
         Database db = new Database(this);
         Page page = new Page();
 
@@ -38,8 +42,14 @@ public class IncludeActivity extends AppCompatActivity {
         CheckBox connection = findViewById(R.id.dadosMoveis);
 
         /// Incluindo os dados recebidos pela tela de cadastro no objeto
-        page.setTitle(Objects.requireNonNull(descricao.getText()).toString());
         page.setUrl(Objects.requireNonNull(url.getText()).toString());
+        Document document = Jsoup.connect(page.getUrl()).get();
+        if(descricao.getText().toString() == "" || descricao.getText().toString() == null){
+            String  title = document.head().getElementById("title").text();
+            page.setTitle(title);
+        }
+        else
+            page.setTitle(Objects.requireNonNull(descricao.getText()).toString());
 
         /// Conversão de minutos para milisegundos
         long min = Long.parseLong(Objects.requireNonNull(minutes.getText()).toString());
