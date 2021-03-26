@@ -50,6 +50,10 @@ public class Database {
                 page.getContent() != null ? page.getContent() : "",
                 page.getLastUpdate() != null ? page.getLastUpdate().getTime() : 0
         );
+
+        System.out.println("--------------------------------------------");
+        System.out.println(page.getLastTime());
+
         database.execSQL(query);
     }
 
@@ -145,11 +149,11 @@ public class Database {
                 page.setImageSource(cursor.getString(indexImageSource));
                 page.setUrl(cursor.getString(indexUrl));
                 page.setTimeInterval(cursor.getLong(indexTimeInterval));
-                page.setAllowMobileConnection(cursor.getInt(indexAllowMobileConnection) == 1 ? true : false);
+                page.setAllowMobileConnection(cursor.getInt(indexAllowMobileConnection) == 1);
                 page.setPercentage(cursor.getInt(indexPercentage));
-                page.setLastTime(new Date(cursor.getLong(indexLastTime) * 1000));
+                page.setLastTime(new Date(cursor.getLong(indexLastTime)));
                 page.setContent(cursor.getString(indexContent));
-                page.setLastUpdate(new Date(cursor.getLong(indexLastUpdate) * 1000));
+                page.setLastUpdate(new Date(cursor.getLong(indexLastUpdate)));
                 pages.add(page);
             } while (cursor.moveToNext());
         }
