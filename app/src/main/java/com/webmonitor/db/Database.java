@@ -12,10 +12,9 @@ import java.util.List;
 public class Database {
     private static final String DATABASE_NAME = "web_monitor";
 
-
     private static final int DATABASE_ACCESS = 0;
     private static final String SQL_STRUCT = "CREATE TABLE IF NOT EXISTS pages(id_ INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL,  url TEXT NOT NULL,  imageSource TEXT NOT NULL, timeInterval INTEGER DEFAULT 10000 NOT NULL, allowMobileConnection INTEGER NOT NULL, percentage INTEGER DEFAULT 1 NOT NULL); ";
-    private static final String SQL_INSERT = "INSERT INTO pages (title, imageSource, url, timeInterval, allowMobileConnection, percentage) VALUES ('%s', '%s', '%s', '%d', '%d', '%d);";
+    private static final String SQL_INSERT = "INSERT INTO pages (title, imageSource, url, timeInterval, allowMobileConnection, percentage) VALUES ('%s', '%s', '%s', '%d', '%d', '%d');";
     private static final String SQL_SELECT_ALL = "SELECT * FROM pages;";
     private static final String SQL_CLEAR = "DROP TABLE IF EXISTS pages;";
     private SQLiteDatabase database;

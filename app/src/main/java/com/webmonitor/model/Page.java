@@ -10,11 +10,12 @@ public class Page {
     private String url;
     private String imageSource;
     private Long timeInterval; //miliseconds
+    private Integer percentage;
     private Date lastTime;
     private boolean allowMobileConnection;
 
 
-    public Page(Long id, String title, String url, String imageSource, Long timeInterval, boolean allowMobileConnection) {
+    public Page(Long id, String title, String url, String imageSource, Long timeInterval, boolean allowMobileConnection, Integer percentage) {
         this.id = id;
         this.title = title;
         this.url = url;
@@ -22,6 +23,7 @@ public class Page {
         this.timeInterval = timeInterval;
         this.lastTime = Calendar.getInstance().getTime();
         this.allowMobileConnection = allowMobileConnection;
+        this.percentage = percentage;
     }
 
     public Page() { }
@@ -67,6 +69,14 @@ public class Page {
     public void setLastTime(Date lastTime){ this.lastTime = lastTime; }
 
     public boolean getAllowMobileConnection(){ return this.allowMobileConnection; }
+
+    public Integer getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(Integer percentage) {
+        this.percentage = percentage;
+    }
 
     public void setAllowMobileConnection(boolean allowMobileConnection) { this.allowMobileConnection = allowMobileConnection; }
 }
