@@ -31,7 +31,7 @@ public class AlertNotification {
         }
     }
 
-    public static void sendNotification(Context context, Intent intent, Page page){
+    public static void sendUpdateNotification(Context context, Page page){
 
         //Não cria outro canal se já existir o mesmo
         createNotificationChannel(context);
@@ -39,7 +39,7 @@ public class AlertNotification {
         Log.i("WebMonitor", "AlertNotification.sendNotification");
 
         Intent newIntent = new Intent(context, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, newIntent, 0);
 
         Notification.Builder notBuilder= new Notification.Builder(context, "WebMonitor")
@@ -50,15 +50,46 @@ public class AlertNotification {
                 .setAutoCancel(true);
 
         NotificationManager notManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notManager.notify(page.getTimeInterval().intValue(), notBuilder.build());
+        notManager.notify(page.getId().intValue(), notBuilder.build());
 
     }
 
-    public static void removeNotifications(Context context){
+    public static void sendNoConectivityNotification(Context context){
+
+        //Não cria outro canal se já existir o mesmo
+        createNotificationChannel(context);
+
+        Log.i("WebMonitor", "AlertNotification.sendNotification");
+
+        Intent newIntent = new Intent(context, MainActivity.class);
+        newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, newIntent, 0);
+
+        Notification.Builder notBuilder= new Notification.Builder(context, "WebMonitor")
+                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setContentTitle("Sem internet:")
+                .setContentText("Não é possível verificar nenhuma página")
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
+        NotificationManager notManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notManager.notify(-1, notBuilder.build());
+
+    }
+
+    public static void removeAllNotifications(Context context){
         Log.i("WebMonitor", "AlertNotification.sendNotification");
 
         NotificationManager notManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notManager.cancelAll();
+    }
+
+
+    public static void removeNoConectivityNotifications(Context context){
+        Log.i("WebMonitor", "AlertNotification.sendNotification");
+
+        NotificationManager notManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notManager.cancel(-1);
     }
 
 }
