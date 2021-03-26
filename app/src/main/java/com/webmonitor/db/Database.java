@@ -111,7 +111,7 @@ public class Database {
             indexImageSource = cursor.getColumnIndex("imageSource");
             indexUrl = cursor.getColumnIndex("url");
             indexTimeInterval = cursor.getColumnIndex("timeInterval");
-            indexAllowMobileConnection = cursor.getColumnIndex("timeInterval");
+            indexAllowMobileConnection = cursor.getColumnIndex("allowMobileConnection");
             indexPercentage = cursor.getColumnIndex("percentage");
             indexLastTime = cursor.getColumnIndex("lastTime");
 
