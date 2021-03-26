@@ -16,7 +16,7 @@ public class Database {
     private static final String SQL_INSERT = "INSERT INTO pages (title, imageSource, url, timeInterval, allowMobileConnection, percentage, lastTime, content, lastUpdate) VALUES ('%s', '%s', '%s', '%d', '%d', '%d', '%d', '%s', '%d');";
     private static final String SQL_SELECT_ALL = "SELECT * FROM pages;";
     private static final String SQL_CLEAR = "DROP TABLE IF EXISTS pages;";
-    private static final String SQL_UPDATE = "UPDATE pages SET title = %s, imageSource = %s, url = %s, timeInterval = %d, allowMobileConnection = %d, percentage = %d, lastTime = %d, content = %s WHERE id_ = %d;";
+    private static final String SQL_UPDATE = "UPDATE pages SET title = '%s', imageSource = '%s', url = '%s', timeInterval = %d, allowMobileConnection = %d, percentage = %d, lastTime = %d, content = '%s' WHERE id_ = %d;";
     private static final String SQL_UPDATE_LAST_CHECK = "UPDATE pages SET lastTime = %d WHERE id_ = %d;";
     private static final String SQL_UPDATE_LAST_UPDATE = "UPDATE pages SET lastUpdate = %d WHERE id_ = %d;";
     private static final String SQL_DELETE = "DELETE FROM pages WHERE id_ = %d;";
@@ -61,14 +61,15 @@ public class Database {
     public void update(Page updatedPage){
         String query = String.format(
                 SQL_UPDATE,
-                updatedPage.getTitle(),
-                updatedPage.getImageSource(),
-                updatedPage.getUrl(),
-                updatedPage.getTimeInterval(),
+                updatedPage.getTitle() != null ? updatedPage.getTitle() : "",
+                updatedPage.getImageSource() != null ? updatedPage.getImageSource() : "",
+                updatedPage.getUrl() != null ? updatedPage.getUrl() : "",
+                updatedPage.getTimeInterval() != null ? updatedPage.getTimeInterval() : 0,
                 updatedPage.getAllowMobileConnection() == true ? 1 : 0,
-                updatedPage.getPercentage(),
-                updatedPage.getLastTime().getTime(),
-                updatedPage.getId()
+                updatedPage.getPercentage() != null ? updatedPage.getPercentage() : 0,
+                updatedPage.getLastTime() != null ? updatedPage.getLastTime().getTime() : 0,
+                updatedPage.getContent() != null ? updatedPage.getContent() : "",
+                updatedPage.getId() != null ? updatedPage.getId() : 0
         );
         database.execSQL(query);
     }
