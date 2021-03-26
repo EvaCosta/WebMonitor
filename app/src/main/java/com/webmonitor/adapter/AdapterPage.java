@@ -32,11 +32,16 @@ public class AdapterPage extends ArrayAdapter<Page> {
         this.activity = activity;
         this.db = db;
         this.pagesList = pages;
+
+        showNoPagesMessage();
+
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
 
     }
 
     public View getView(int position,View view,ViewGroup parent) {
+
         LayoutInflater inflater= activity.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.pages_list, null,true);
 
@@ -102,6 +107,7 @@ public class AdapterPage extends ArrayAdapter<Page> {
             db.delete(id);
             pagesList.remove(position);
             notifyDataSetChanged();
+            showNoPagesMessage();
         });
         box.setNegativeButton("Não", (dialog, which) -> {
 
@@ -114,6 +120,18 @@ public class AdapterPage extends ArrayAdapter<Page> {
         String hora = new SimpleDateFormat("HH:mm:ss").format(date);
 
         return data + " " + hora;
+    }
+
+    private void showNoPagesMessage(){
+        if(pagesList.size() > 0){
+            activity.findViewById(R.id.nopages).setVisibility(View.GONE);
+            activity.findViewById(R.id.recyclerView).setVisibility(View.VISIBLE);
+        }
+        else{
+            activity.findViewById(R.id.nopages).setVisibility(View.VISIBLE);
+            activity.findViewById(R.id.recyclerView).setVisibility(View.GONE);
+        }
+
     }
 
 }
