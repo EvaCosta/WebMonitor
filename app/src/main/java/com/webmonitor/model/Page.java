@@ -13,7 +13,8 @@ public class Page {
     private String content;
     private Long timeInterval; //miliseconds
     private Integer percentage;
-    private Date lastCheck;
+    private Date lastTime;
+    private Date lastUpdate;
     private boolean allowMobileConnection;
 
 
@@ -86,9 +87,13 @@ public class Page {
 
     public void setTimeInterval(Long timeInterval) { this.timeInterval = timeInterval; }
 
-    public Date getLastCheck(){ return lastCheck; }
+    public Date getLastTime(){ return lastTime; }
 
-    public void setLastCheck(Date lastCheck){ this.lastCheck = lastCheck; }
+    public void setLastTime(Date lastTime){ this.lastTime = lastTime; }
+
+    public Date getLastUpdate(){ return lastUpdate; }
+
+    public void setLastUpdate(Date lastUpdate){ this.lastUpdate = lastUpdate; }
 
     public boolean getAllowMobileConnection(){ return this.allowMobileConnection; }
 
