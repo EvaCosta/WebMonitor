@@ -15,6 +15,7 @@ import java.util.List;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
+    private static boolean noConnectivityNotificationSended = false;
 
     private Context context;
     private Intent intent;
@@ -23,16 +24,23 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i("WebMonitor", "AlarmReceiver.onReceive");
-
         this.context = context;
         this.intent = intent;
         db = new Database(context);
 
         connectivityInfo = new ConnectivityInfo(context);
         if(connectivityInfo.hasConnection()){
+            if(this.noConnectivityNotificationSended){
+                AlertNotification.removeNoConectivityNotifications(context);
+                this.noConnectivityNotificationSended = false;
+            }
             List<Page> pages = getPages();
             selectPagesToCheck(pages);
+        }else{
+            if(this.noConnectivityNotificationSended == false){
+                AlertNotification.sendNoConectivityNotification(context);
+                this.noConnectivityNotificationSended = true;
+            }
         }
     }
 
@@ -42,7 +50,6 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     private void selectPagesToCheck(List<Page> pages){
-        Log.i("WebMonitor", "AlarmReceiver.selectPagesToCheck");
         Date currentTime = Calendar.getInstance().getTime();
         for (Page page : pages) {
             if(connectivityInfo.isWifiConnection() || page.getAllowMobileConnection()){
@@ -59,7 +66,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         boolean wasModified = checkPage(page);
         if(!MainActivity.isActivityVisible() && wasModified){
-            AlertNotification.sendNotification(context, intent, page);
+            AlertNotification.sendUpdateNotification(context, page);
         }
     }
 

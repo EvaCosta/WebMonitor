@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void clearNotifications(Context context){
-        AlertNotification.removeNotifications(this);
+        AlertNotification.removeAllNotifications(this);
     }
 
     private void startAlarmBroadcast(Context context){
