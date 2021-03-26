@@ -40,8 +40,8 @@ public class Database {
         String query = String.format(
                 SQL_INSERT,
                 page.getTitle(),
-                page.getUrl(),
                 page.getImageSource(),
+                page.getUrl(),
                 page.getTimeInterval(),
                 page.getAllowMobileConnection() == true ? 1 : 0,
                 page.getPercentage(),
@@ -108,8 +108,8 @@ public class Database {
         if(cursor.moveToFirst()) {
             indexID = cursor.getColumnIndex("id_");
             indexTitle = cursor.getColumnIndex("title");
-            indexUrl = cursor.getColumnIndex("url");
             indexImageSource = cursor.getColumnIndex("imageSource");
+            indexUrl = cursor.getColumnIndex("url");
             indexTimeInterval = cursor.getColumnIndex("timeInterval");
             indexAllowMobileConnection = cursor.getColumnIndex("timeInterval");
             indexPercentage = cursor.getColumnIndex("percentage");
@@ -119,8 +119,8 @@ public class Database {
                 page = new Page();
                 page.setId(cursor.getLong(indexID));
                 page.setTitle(cursor.getString(indexTitle));
-                page.setUrl(cursor.getString(indexUrl));
                 page.setImageSource(cursor.getString(indexImageSource));
+                page.setUrl(cursor.getString(indexUrl));
                 page.setTimeInterval(cursor.getLong(indexTimeInterval));
                 page.setAllowMobileConnection(cursor.getInt(indexAllowMobileConnection) == 1 ? true : false);
                 page.setPercentage(cursor.getInt(indexPercentage));
