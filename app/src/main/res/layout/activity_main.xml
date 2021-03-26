@@ -13,7 +13,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
-        android:onClick="teste"
+        android:onClick="cadastro"
         android:contentDescription="@string/add_new_page"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

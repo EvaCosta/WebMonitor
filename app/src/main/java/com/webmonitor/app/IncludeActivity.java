@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import com.example.webmonitor.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -51,6 +52,13 @@ public class IncludeActivity extends AppCompatActivity {
 
         /// Insere a página no banco de dados.
         db.insert(page);
+
+        Toast.makeText(this, page.getTitle().toString() + " cadastrado com sucesso!", Toast.LENGTH_LONG).show();
+
+        /// Retorna para a lista principal
+        Intent intent = new Intent(this, MainActivity.class);
+        if (intent != null)
+            startActivity(intent);
 
     } // includePage()
 }

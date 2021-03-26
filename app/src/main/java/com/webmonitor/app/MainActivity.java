@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         list=(ListView)findViewById(R.id.recyclerView);
+        AdapterPage adapter=new AdapterPage(this, new DummyPages().getData());
         list.setAdapter(adapter);
 
         //Elimina as notificações quando o app é aberto
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         context.sendBroadcast(intent);
     }
 
-    public void teste(View view) {
+    public void cadastro(View view) {
         Intent intent = new Intent(this, IncludeActivity.class);
         if (intent != null)
             startActivity(intent);
