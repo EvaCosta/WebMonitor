@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.example.webmonitor.R;
 import com.webmonitor.model.Page;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class AdapterPage extends ArrayAdapter<Page> {
@@ -41,6 +43,7 @@ public class AdapterPage extends ArrayAdapter<Page> {
         TextView titleText = rowView.findViewById(R.id.main_title);
         TextView subtitleText = rowView.findViewById(R.id.subtitle);
         TextView idText = rowView.findViewById(R.id.id_text);
+        TextView datetime = rowView.findViewById(R.id.datetime);
 
         ImageButton btnDelete = rowView.findViewById(R.id.delete_btn);
         ImageButton btnEdit = rowView.findViewById(R.id.edit_btn);
@@ -48,9 +51,11 @@ public class AdapterPage extends ArrayAdapter<Page> {
         titleText.setText(pagesList.get(position).getTitle());
         subtitleText.setText(pagesList.get(position).getUrl());
         idText.setText(pagesList.get(position).getId().toString());
+        datetime.setText(dateFormat(pagesList.get(position).getLastTime()));
 
         titleText.setOnClickListener(v -> openPage(subtitleText));
         subtitleText.setOnClickListener(v -> openPage(subtitleText));
+        datetime.setOnClickListener(v -> openPage(subtitleText));
         btnDelete.setOnClickListener(v -> showDeleteDialog(position, String.valueOf(idText.getText())));
         btnEdit.setOnClickListener(v -> editPage());
 
@@ -117,6 +122,13 @@ public class AdapterPage extends ArrayAdapter<Page> {
             }
         });
         box.show();
+    }
+
+    public String dateFormat(Date date){
+        String data = new SimpleDateFormat("dd/MM/YYYY").format(date);
+        String hora = new SimpleDateFormat("HH:mm:ss").format(date);
+
+        return data + " " + hora;
     }
 
 }
