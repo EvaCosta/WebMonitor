@@ -14,13 +14,13 @@ public class Database {
 
 
     private static final int DATABASE_ACCESS = 0;
-    private static final String SQL_STRUCT = "CREATE TABLE IF NOT EXISTS pages(id_ INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL,  url TEXT NOT NULL,  imageSource TEXT NOT NULL, timeInterval INTEGER DEFAULT 10000 NOT NULL, allowMobileConnection INTEGER NOT NULL); ";
-    private static final String SQL_INSERT = "INSERT INTO pages (title, imageSource, url, timeInterval, allowMobileConnection) VALUES ('%s', '%s', '%s', '%d', '%d');";
+    private static final String SQL_STRUCT = "CREATE TABLE IF NOT EXISTS pages(id_ INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL,  url TEXT NOT NULL,  imageSource TEXT NOT NULL, timeInterval INTEGER DEFAULT 10000 NOT NULL, allowMobileConnection INTEGER NOT NULL, percentage INTEGER DEFAULT 1 NOT NULL); ";
+    private static final String SQL_INSERT = "INSERT INTO pages (title, imageSource, url, timeInterval, allowMobileConnection, percentage) VALUES ('%s', '%s', '%s', '%d', '%d', '%d);";
     private static final String SQL_SELECT_ALL = "SELECT * FROM pages;";
     private static final String SQL_CLEAR = "DROP TABLE IF EXISTS pages;";
     private SQLiteDatabase database;
     private Cursor cursor;
-    private int indexID, indexTitle, indexUrl, indexImageSource, indexTimeInterval, indexAllowMobileConnection;
+    private int indexID, indexTitle, indexUrl, indexImageSource, indexTimeInterval, indexAllowMobileConnection, indexPercentage;
 
     public Database(Context context) {
         database = context.openOrCreateDatabase(DATABASE_NAME, DATABASE_ACCESS, null);
@@ -36,7 +36,7 @@ public class Database {
     }
 
     public void insert(Page page) {
-        String query = String.format(SQL_INSERT, page.getTitle(), page.getUrl(), page.getImageSource(), page.getTimeInterval(), page.getAllowMobileConnection() == true ? 1 : 0);
+        String query = String.format(SQL_INSERT, page.getTitle(), page.getUrl(), page.getImageSource(), page.getTimeInterval(), page.getAllowMobileConnection() == true ? 1 : 0, page.getPercentage());
         database.execSQL(query);
     }
 
@@ -53,6 +53,7 @@ public class Database {
             indexImageSource = cursor.getColumnIndex("imageSource");
             indexTimeInterval = cursor.getColumnIndex("timeInterval");
             indexAllowMobileConnection = cursor.getColumnIndex("timeInterval");
+            indexPercentage = cursor.getColumnIndex("percentage");
 
             do {
                 page = new Page();
@@ -62,6 +63,7 @@ public class Database {
                 page.setImageSource(cursor.getString(indexImageSource));
                 page.setTimeInterval(cursor.getLong(indexTimeInterval));
                 page.setAllowMobileConnection(cursor.getInt(indexAllowMobileConnection) == 1 ? true : false);
+                page.setPercentage(cursor.getInt(indexPercentage));
 
                 pages.add(page);
             } while (cursor.moveToNext());
