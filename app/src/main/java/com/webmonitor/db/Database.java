@@ -18,6 +18,7 @@ public class Database {
     private static final String SQL_CLEAR = "DROP TABLE IF EXISTS pages;";
     private static final String SQL_UPDATE = "UPDATE pages SET title = %s, imageSource = %s, url = %s, timeInterval = %d, allowMobileConnection = %d, percentage = %d, lastTime = %d WHERE id_ = %d;";
     private static final String SQL_UPDATE_LAST_TIME = "UPDATE pages SET lastTime = %d WHERE id_ = %d;";
+    private static final String SQL_DELETE = "DELETE FROM pages WHERE id_ = %d;";
     private SQLiteDatabase database;
     private Cursor cursor;
     private int indexID, indexTitle, indexUrl, indexImageSource, indexTimeInterval, indexAllowMobileConnection, indexPercentage, indexLastTime;
@@ -78,6 +79,22 @@ public class Database {
                 SQL_UPDATE_LAST_TIME,
                 page.getLastTime().getTime(),
                 page.getId()
+        );
+        database.execSQL(query);
+    }
+
+    public void delete(Page page){
+        String query = String.format(
+                SQL_DELETE,
+                page.getId()
+        );
+        database.execSQL(query);
+    }
+
+    public void delete(long id){
+        String query = String.format(
+                SQL_DELETE,
+                id
         );
         database.execSQL(query);
     }
