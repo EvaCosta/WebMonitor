@@ -3,7 +3,6 @@ package com.webmonitor.adapter;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.webmonitor.R;
+import com.webmonitor.db.Database;
 import com.webmonitor.model.Page;
 
 import java.text.SimpleDateFormat;
@@ -23,16 +23,16 @@ import java.util.List;
 
 public class AdapterPage extends ArrayAdapter<Page> {
     private Activity activity;
+    private Database db;
     private List<Page> pagesList;
     private static LayoutInflater inflater = null;
 
-    public AdapterPage (Activity activity, List<Page> pagesList) {
-        super(activity, R.layout.pages_list, pagesList);
-
-            this.activity = activity;
-            this.pagesList = pagesList;
-
-            inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public AdapterPage (Activity activity, Database db, List<Page> pages) {
+        super(activity, R.layout.pages_list, pages);
+        this.activity = activity;
+        this.db = db;
+        this.pagesList = pages;
+        inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
 
@@ -89,43 +89,28 @@ public class AdapterPage extends ArrayAdapter<Page> {
 
     public void showDeleteDialog(int position, String idText){
 
-        Long id = Long.parseLong(idText);
+        long id = Long.parseLong(idText);
 
-        ImageButton btn = (ImageButton) activity.findViewById(R.id.delete_btn);
+        ImageButton btn = activity.findViewById(R.id.delete_btn);
 
         AlertDialog.Builder box = new AlertDialog.Builder(activity);
         box.setTitle("Excluir");
         box.setIcon(android.R.drawable.ic_menu_delete);
         box.setMessage("Tem certeza que deseja excluir este item?");
 
-        box.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-
-                for(Page p : pagesList){
-                    if(id.equals(p.getId())) {
-                        Toast.makeText(activity, "Item excluído: " + p.getTitle(), Toast.LENGTH_LONG).show();
-                        System.out.println(position);
-
-                        notifyDataSetChanged();
-
-                    }
-                }
-                pagesList.remove(position); // isso exclui o que vem da dummy pages
-            }
+        box.setPositiveButton("Sim", (dialog, which) -> {
+            db.delete(id);
+            pagesList.remove(position);
+            notifyDataSetChanged();
         });
-        box.setNegativeButton("Não", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        box.setNegativeButton("Não", (dialog, which) -> {
 
-            }
         });
         box.show();
     }
 
     public String dateFormat(Date date){
-        String data = new SimpleDateFormat("dd/MM/YYYY").format(date);
+        String data = new SimpleDateFormat("dd/MM/yyyy").format(date);
         String hora = new SimpleDateFormat("HH:mm:ss").format(date);
 
         return data + " " + hora;

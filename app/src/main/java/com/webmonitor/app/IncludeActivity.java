@@ -1,19 +1,20 @@
 package com.webmonitor.app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.webmonitor.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.webmonitor.db.Database;
 import com.webmonitor.model.Page;
 
+import java.util.Date;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class IncludeActivity extends AppCompatActivity {
@@ -37,15 +38,15 @@ public class IncludeActivity extends AppCompatActivity {
         CheckBox connection = findViewById(R.id.dadosMoveis);
 
         /// Incluindo os dados recebidos pela tela de cadastro no objeto
-        page.setTitle(descricao.getText().toString());
-        page.setUrl(url.getText().toString());
+        page.setTitle(Objects.requireNonNull(descricao.getText()).toString());
+        page.setUrl(Objects.requireNonNull(url.getText()).toString());
 
         /// Conversão de minutos para milisegundos
-        Long min = Long.parseLong(minutes.getText().toString());
+        long min = Long.parseLong(Objects.requireNonNull(minutes.getText()).toString());
         page.setTimeInterval(TimeUnit.MINUTES.toMillis(min));
-
+        page.setLastTime(new Date());
         /// Porcentagem de alteração
-        Integer percent = Integer.parseInt(porcentagem.getText().toString());
+        Integer percent = Integer.parseInt(Objects.requireNonNull(porcentagem.getText()).toString());
         page.setPercentage(percent);
 
         page.setAllowMobileConnection(connection.isSelected());
@@ -53,12 +54,11 @@ public class IncludeActivity extends AppCompatActivity {
         /// Insere a página no banco de dados.
         db.insert(page);
 
-        Toast.makeText(this, page.getTitle().toString() + " cadastrado com sucesso!", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, page.getTitle() + " cadastrado com sucesso!", Toast.LENGTH_LONG).show();
 
         /// Retorna para a lista principal
         Intent intent = new Intent(this, MainActivity.class);
-        if (intent != null)
-            startActivity(intent);
+        startActivity(intent);
 
     } // includePage()
 }

@@ -1,25 +1,11 @@
 package com.webmonitor.app;
 
 import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Message;
 import android.util.Log;
-
-import androidx.core.app.NotificationCompat;
-
-import com.example.webmonitor.R;
-import com.webmonitor.model.DummyPages;
-import com.webmonitor.model.Page;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 
 public class AutoStartAlarmReceiver extends BroadcastReceiver {

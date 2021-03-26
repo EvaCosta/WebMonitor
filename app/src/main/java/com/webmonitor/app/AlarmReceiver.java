@@ -3,12 +3,9 @@ package com.webmonitor.app;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkInfo;
 import android.util.Log;
 
-import com.webmonitor.model.DummyPages;
+import com.webmonitor.db.Database;
 import com.webmonitor.model.Page;
 
 import java.util.Calendar;
@@ -21,6 +18,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     private Context context;
     private Intent intent;
+    private Database db;
     private ConnectivityInfo connectivityInfo;
 
     @Override
@@ -29,6 +27,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         this.context = context;
         this.intent = intent;
+        db = new Database(context);
 
         connectivityInfo = new ConnectivityInfo(context);
         if(connectivityInfo.hasConnection()){
@@ -39,8 +38,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     /**** Aguardando serviço de persistencia *******/
     private List<Page> getPages(){
-        //TODO pegar as "Pages" do serviço de persistência
-        return new DummyPages().getData();
+        return db.all();
     }
 
     private void selectPagesToCheck(List<Page> pages){
@@ -48,7 +46,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         Date currentTime = Calendar.getInstance().getTime();
         for (Page page : pages) {
             if(connectivityInfo.isWifiConnection() || page.getAllowMobileConnection()){
-                Long timeToCheck = page.getLastTime().getTime() + page.getTimeInterval();
+                long timeToCheck = page.getLastTime().getTime() + page.getTimeInterval();
                 if (timeToCheck/1000L <= (currentTime.getTime()/1000L)) {
                     readyToCheck(page);
                     page.setLastTime(currentTime);
