@@ -6,21 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.webmonitor.app.IncludeActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:text="Cadastro de páginas"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/button"
         android:layout_width="0dp"
@@ -28,6 +13,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="10dp"
+        android:onClick="includePage"
         android:text="Cadastrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,6 +41,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="GET" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Cadastro de páginas"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -69,6 +66,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/percentage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="% Alteração"
@@ -77,7 +75,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/dadosMoveis"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
@@ -101,6 +99,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/minutes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Minutos"
@@ -120,6 +119,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/descricao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Descrição" />
@@ -138,6 +138,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/url"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Site" />

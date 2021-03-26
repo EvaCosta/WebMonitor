@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         Instant instant = Instant.from(ldate.atStartOfDay(ZoneId.of("GMT")));
         Date date = Date.from(instant);
         page.setLastTime(date);
+        page.setPercentage(1);
         db.insert(page);
 
         Log.d("TESTE", db.all().toString());
