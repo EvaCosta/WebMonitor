@@ -40,15 +40,15 @@ public class Database {
     public void insert(Page page) {
         String query = String.format(
                 SQL_INSERT,
-                page.getTitle(),
-                page.getImageSource(),
-                page.getUrl(),
-                page.getTimeInterval(),
+                page.getTitle() != null ? page.getTitle() : "",
+                page.getImageSource() != null ? page.getImageSource() : "",
+                page.getUrl() != null ? page.getUrl() : "",
+                page.getTimeInterval() != null ? page.getTimeInterval() : 0,
                 page.getAllowMobileConnection() == true ? 1 : 0,
                 page.getPercentage(),
-                page.getLastTime().getTime(),
-                page.getContent(),
-                page.getLastUpdate().getTime()
+                page.getLastTime() != null ? page.getLastTime().getTime() : 0,
+                page.getContent() != null ? page.getContent() : "",
+                page.getLastUpdate() != null ? page.getLastUpdate().getTime() : 0
         );
         database.execSQL(query);
     }
