@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.webmonitor.app.EditActivity">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:onClick="editPage"
+        android:text="Editar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutContainer"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutContainer"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.712" />
+
+
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="295dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="POST" />
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GET" />
+    </RadioGroup>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="110dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.50">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/percentage"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:hint="% Alteração"
+            android:inputType="numberDecimal"
+            android:text="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <Switch
+        android:id="@+id/dadosMoveisSwitch"
+        android:layout_width="142dp"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:text="Dados Móveis"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutContainer"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout9"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout9"
+        app:layout_constraintTop_toTopOf="@+id/textInputLayoutContainer"
+        app:layout_constraintVertical_bias="0.32" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="120dp"
+        android:layout_height="295dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutContainer"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutContainer"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutContainer"
+        app:layout_constraintTop_toTopOf="@+id/textInputLayoutContainer"
+        app:layout_constraintVertical_bias="0.48">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/minutes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Minutos"
+            android:inputType="numberDecimal"
+            android:text="5" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout9"
+        android:layout_width="0dp"
+        android:layout_height="517dp"
+        android:layout_marginTop="76dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutContainer"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutContainer"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutContainer"
+        app:layout_constraintTop_toTopOf="@+id/textInputLayoutContainer"
+        app:layout_constraintVertical_bias="0.65999997">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/descricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descrição" />
+
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Site" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

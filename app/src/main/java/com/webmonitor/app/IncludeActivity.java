@@ -32,6 +32,7 @@ public class IncludeActivity extends AppCompatActivity {
 
     /// Faz o cadastro da página no banco.
     public void includePage(View view) throws IOException {
+
         Database db = new Database(this);
 
         Thread thread = new Thread(new Runnable() {

@@ -25,6 +25,7 @@ public class Database {
     private int indexID, indexTitle, indexUrl, indexImageSource, indexTimeInterval, indexAllowMobileConnection, indexPercentage, indexLastTime, indexContent, indexLastUpdate;
 
     public Database(Context context) {
+        //context.deleteDatabase(DATABASE_NAME);
         database = context.openOrCreateDatabase(DATABASE_NAME, DATABASE_ACCESS, null);
         database.execSQL(SQL_STRUCT);
     }
@@ -51,8 +52,8 @@ public class Database {
                 page.getLastUpdate() != null ? page.getLastUpdate().getTime() : 0
         );
 
-        System.out.println("--------------------------------------------");
-        System.out.println(page.getLastTime());
+        //System.out.println("--------------------------------------------");
+        //System.out.println(page.getLastTime());
 
         database.execSQL(query);
     }
@@ -127,7 +128,6 @@ public class Database {
     public List<Page> all() {
         List<Page> pages = new ArrayList<Page>();
         Page page;
-
         cursor = database.rawQuery(SQL_SELECT_ALL, null);
 
         if(cursor.moveToFirst()) {

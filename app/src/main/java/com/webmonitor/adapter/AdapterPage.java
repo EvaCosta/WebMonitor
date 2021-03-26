@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.webmonitor.R;
+import com.webmonitor.app.EditActivity;
 import com.webmonitor.db.Database;
 import com.webmonitor.model.Page;
 
@@ -37,8 +38,6 @@ public class AdapterPage extends ArrayAdapter<Page> {
         showNoPagesMessage();
 
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-
     }
 
     public View getView(int position,View view,ViewGroup parent) {
@@ -66,15 +65,31 @@ public class AdapterPage extends ArrayAdapter<Page> {
         subtitleText.setOnClickListener(v -> openPage(subtitleText));
         lastChange.setOnClickListener(v -> openPage(subtitleText));
         btnDelete.setOnClickListener(v -> showDeleteDialog(position, String.valueOf(idText.getText())));
-        btnEdit.setOnClickListener(v -> editPage());
+        btnEdit.setOnClickListener(v -> editPage(position));
 
 
         return rowView;
 
     }
 
-    public void editPage(){
-        //Janela para edição da pagina do Paulo e da Eva será chamada aqui
+    public void editPage(int position){
+        Intent intent = new Intent(activity, EditActivity.class);
+
+        if (intent != null) {
+            Page page = pagesList.get(position);
+
+            intent.putExtra("ID", page.getId().toString());
+            intent.putExtra("URL", page.getUrl());
+            intent.putExtra("Descricao", page.getTitle());
+            intent.putExtra("Minutos", page.getTimeInterval().toString());
+            intent.putExtra("Porcentagem", page.getPercentage().toString());
+
+            int data = page.getAllowMobileConnection() ? 0 : 1;
+
+            intent.putExtra("DataMobile", String.format("%d",data));
+
+            activity.startActivity(intent);
+        }
     }
 
     public void openPage(View view){
