@@ -3,16 +3,21 @@ package com.webmonitor.app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.webmonitor.R;
@@ -27,6 +32,10 @@ import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
+import java.io.File;
+import java.io.FileReader;
+import java.net.URL;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,34 +45,17 @@ public class MainActivity extends AppCompatActivity {
     private Database db;
 
     public static boolean isActivityVisible() {
-        return activityVisible || false;
+        return activityVisible;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        db = new Database(this);
-        Page page = new Page();
-        page.setTitle("aaa");
-        page.setAllowMobileConnection(true);
-        page.setImageSource("aaa");
-        page.setUrl("");
-        page.setTimeInterval(10000L);
-        LocalDate ldate = LocalDate.now();
-        Instant instant = Instant.from(ldate.atStartOfDay(ZoneId.of("GMT")));
-        Date date = Date.from(instant);
-        page.setLastTime(date);
-        page.setPercentage(1);
-        db.insert(page);
-
-        Log.d("TESTE", db.all().toString());
-
-        AdapterPage adapter=new AdapterPage(this, DummyPages.data);
         list=(ListView)findViewById(R.id.recyclerView);
         list.setAdapter(adapter);
 
+        //Elimina as notificações quando o app é aberto
         startAlarmBroadcast(this);
 
     }

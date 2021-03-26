@@ -20,15 +20,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:ellipsize="end"
+        android:maxWidth="250dp"
+        android:maxLength="30"
+        android:maxLines="1"
+
         android:padding="2dp"
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#4d4d4d"
         android:textStyle="bold"
-        android:maxLength="30"
-        android:maxLines="1"
-        android:maxWidth="250dp"
-        android:ellipsize="end"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,7 +39,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:text="sdsd"
+        android:clickable="true"
+
+        android:text="@string/dummy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_title"
@@ -48,15 +52,35 @@
         style="@android:style/Widget.Holo.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="15dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/delete_page"
         android:gravity="end"
+
         android:paddingTop="5dip"
         android:scaleType="center"
         android:src="@drawable/ic_delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/edit_btn"
+        style="@android:style/Widget.Holo.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="15dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/edit_page"
+        android:gravity="end"
+
+        android:paddingTop="5dip"
+        android:scaleType="center"
+        android:src="@drawable/ic_edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -66,13 +90,26 @@
         android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginBottom="8dp"
-        android:text="Última modificação em: 22/03/2021 20:34"
+        android:clickable="true"
+
+        android:text="@string/dummy_last_mod"
         app:layout_constraintBottom_toTopOf="@+id/main_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subtitle"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/id_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dummy"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
