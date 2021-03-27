@@ -20,9 +20,9 @@ Depois de baixado o pacote, basta executar.
 
 
 ### Aplicação em funcionamento
-<a href="https://github.com/EvaCosta/WebMonitor/blob/main/demo/funcionamento_aplicacao.gif">
+<a href="https://github.com/EvaCosta/WebMonitor/blob/gh-pages/demo/cadastro_sucesso.png">
   <div align="center">
-    <img src="https://github.com/EvaCosta/WebMonitor/blob/main/demo/funcionamento_aplicacao.gif"  width="100%" height="100%">
+       <img src="https://github.com/EvaCosta/WebMonitor/blob/gh-pages/demo/cadastro_sucesso.png"  width="100%" height="100%">
   </div>
 </a>
 
