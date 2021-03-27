@@ -22,7 +22,7 @@ public class Database {
     private static final String SQL_DELETE = "DELETE FROM pages WHERE id_ = %d;";
     private SQLiteDatabase database;
     private Cursor cursor;
-    private int indexID, indexTitle, indexUrl, indexImageSource, indexTimeInterval, indexAllowMobileConnection, indexPercentage, indexLastTime, indexContent, indexLastUpdate;
+    private int indexID, indexTitle, indexUrl, indexImageSource, indexTimeInterval, indexAllowMobileConnection, indexPercentage, indexLastTime, indexContent, indexLastUpdate, indexHttpRequestMethod;
 
     public Database(Context context) {
         //context.deleteDatabase(DATABASE_NAME);
@@ -143,6 +143,7 @@ public class Database {
             indexLastTime = cursor.getColumnIndex("lastTime");
             indexContent = cursor.getColumnIndex("content");
             indexLastUpdate = cursor.getColumnIndex("lastUpdate");
+            indexHttpRequestMethod = cursor.getColumnIndex("httpRequestMethod");
 
             do {
                 page = new Page();
@@ -156,6 +157,7 @@ public class Database {
                 page.setLastTime(new Date(cursor.getLong(indexLastTime)));
                 page.setContent(cursor.getString(indexContent));
                 page.setLastUpdate(new Date(cursor.getLong(indexLastUpdate)));
+                page.setHttpRequestMethod(cursor.getString(indexHttpRequestMethod));
                 pages.add(page);
             } while (cursor.moveToNext());
         }
