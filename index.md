@@ -1,37 +1,65 @@
-## Welcome to GitHub Pages
+# WebMonitor
 
-You can use the [editor on GitHub](https://github.com/EvaCosta/WebMonitor/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+O Web Monitor é um app Android através dele é possível que usuários acompanhem atualizações em uma ou mais páginas web​. De forma que usuários serão informados sobre alterações no conteúdo das mesmas.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+<a href="https://evacosta.github.io//">WebMonitor Page</a>
 
-### Markdown
+## Sobre
+<p>Projeto desenvolvido no curso de <b>Tecnologia em Sistemas para Internet</b> pertencente ao <b>IF Sudeste MG Barbacena</b> na disciplina de <b>Linguagem de Programação Visual</b> ministrada pelo professor <a href="https://github.com/rafjaa">Rafael Alencar</a> em 2021.</p>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## 1. Instalando o _apk_
+O _apk_ pode ser instalado usando o APK disponível na seção [**Releases**](https://github.com/EvaCosta/webmonitor/releases).
 
-```markdown
-Syntax highlighted code block
+Depois de baixado o pacote, basta executar.
 
-# Header 1
-## Header 2
-### Header 3
+<a href="https://github.com/EvaCosta/WebMonitor/blob/main/demo/download_apk.gif">
+  <div align="center">
+    <img src="https://github.com/EvaCosta/WebMonitor/blob/main/demo/download_apk.gif"  width="30%" height="30%">
+  </div>
+</a>  
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+### Aplicação em funcionamento
+<a href="https://github.com/EvaCosta/WebMonitor/blob/main/demo/funcionamento_aplicacao.gif">
+  <div align="center">
+    <img src="https://github.com/EvaCosta/WebMonitor/blob/main/demo/funcionamento_aplicacao.gif"  width="100%" height="100%">
+  </div>
+</a>
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
-```
+### Status de Visibilidade do Aplicavo
+Uma notificação é mostrada quando o aplicativo encontra-se offline devido a falta de conexão com a internet.
+<p align="center">
+  <img src="https://github.com/EvaCosta/WebMonitor/blob/main/demo/notifica_sem_internet.jpeg" width="600"/>
+</p>
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Apresentações Individuais  
 
-### Jekyll Themes
+ <ul>
+  
+  <li><a href=https://drive.google.com/file/d/1aG1pOq1EcIR54-gOcD2vpCxkz34n-S9D/view?usp=sharing>Carlos Roberto Junior</a></li>
+  <li><a href=https://drive.google.com/file/d/1xXWLY0rbNn8RCBanvrLSzk5yq38n0M95/view?usp=sharing>Eva Costa De Melo</a></li>
+  <li><a href=https://drive.google.com/file/d/1YXMHvMrVFNHDLlcw8YfO-HdRMGrLrG6t/view?usp=sharing>Hugo Leonardo Bianchetti</a></li>
+  <li><a href=https://drive.google.com/file/d/1Ef2ODpAEYghQSgYiWg9voDDNkCfBAQB0/view>João Pedro Fonseca Diniz</a></li>  
+  <li><a href=https://drive.google.com/file/d/1xYy2QIRthcHc7uqIjBm-NKWbtf9uCHM6/view>Leonardo Magno Ribeiro Carvalho</a></li>  
+  <li><a href=https://drive.google.com/file/d/1Hd0JvEGvr8MsIU8Wub2-2kuOuI-Jasyb/view?usp=sharing>Ramon Giovane Dias Rosa</a></li>  
+  <li><a href=https://drive.google.com/file/d/19EzuxIgsV8GLOb98Myh3oNaMrcc7gLau/view?usp=sharing/>Paulo Cirino Junior</a></li>
+  <li><a href=https://drive.google.com/file/d/1R7wTbboZqQoZSJQ76i3HVzauTRLa4CZx/view?usp=drivesdk/>Rafaela Aparecida Pereira Paiva</a></li>
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/EvaCosta/WebMonitor/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+</ul>
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Equipe 
+ 
+ <ul>
+  
+  <li><a href=https://github.com/carlosrjr>Carlos Roberto Junior</a></li>
+  <li><a href=https://github.com/EvaCosta>Eva Costa De Melo</a></li>
+  <li><a href=https://github.com/hugo-bianchetti>Hugo Leonardo Bianchetti</a></li>
+  <li><a href=https://github.com/JoaoPedro150>João Pedro Fonseca Diniz</a></li>  
+  <li><a href=https://github.com/leuribeiru>Leonardo Magno Ribeiro Carvalho</a></li>  
+  <li><a href=https://github.com/RamonGiovane>Ramon Giovane Dias Rosa</a></li>  
+  <li><a href=https://github.com/paulocirinojr/>Paulo Cirino Junior</a></li>
+  <li><a href=https://github.com/rafaela/>Rafaela Aparecida Pereira Paiva</a></li>
+
+</ul>
