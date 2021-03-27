@@ -83,6 +83,7 @@ public class AdapterPage extends ArrayAdapter<Page> {
             intent.putExtra("Descricao", page.getTitle());
             intent.putExtra("Minutos", page.getTimeInterval().toString());
             intent.putExtra("Porcentagem", page.getPercentage().toString());
+            intent.putExtra("Radio", page.getHttpRequestMethod());
 
             int data = page.getAllowMobileConnection() ? 0 : 1;
 

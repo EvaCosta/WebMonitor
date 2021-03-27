@@ -21,7 +21,7 @@
 
 
     <RadioGroup
-        android:id="@+id/radioGroup2"
+        android:id="@+id/radioGroupEdit"
         android:layout_width="295dp"
         android:layout_height="99dp"
         android:layout_marginTop="50dp"
