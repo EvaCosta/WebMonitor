@@ -18,12 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
     ListView list;
 
-    private static boolean activityVisible;
-
-    public static boolean isActivityVisible() {
-        return activityVisible;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,23 +30,6 @@ public class MainActivity extends AppCompatActivity {
         //Elimina as notificações quando o app é aberto
         startAlarmBroadcast(this);
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        clearNotifications(this);
-        activityVisible = true;
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        activityVisible = false;
-    }
-
-    private void clearNotifications(Context context){
-        AlertNotification.removeAllNotifications(this);
     }
 
     private void startAlarmBroadcast(Context context){
