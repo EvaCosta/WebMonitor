@@ -23,14 +23,14 @@ public class DatabaseTest {
 
             data = new ArrayList<>();
 
-            data.add(new Page(1L, "Resultado da Pesquisa do Google", "google.com", "link.com", (long) 60000, true, 1));
-            data.add(new Page(2L, "Instagram", "instagram.com", "link.com", 2L * 60000, false, 1));
-            data.add(new Page(3L, "Facebook", "facebook.com", "link.com", 3L * 60000, true, 1));
-            data.add(new Page(4L, "IFBarbacena", "google.com", "link.com", 4L * 60000, false, 1));
-            data.add(new Page(5L, "GitHub", "google.com", "link.com", 5L * 60000, true, 1));
-            data.add(new Page(6L, "Uol", "google.com", "link.com", 6L * 60000, false, 1));
-            data.add(new Page(7L, "Terra", "google.com", "link.com", 7L * 60000, true, 1));
-            data.add(new Page(8L, "Gmail", "google.com", "link.com", 8L * 60000, false, 1));
+            data.add(new Page(1L, "Resultado da Pesquisa do Google", "google.com", "link.com", (long) 60000, true, 1.0));
+            data.add(new Page(2L, "Instagram", "instagram.com", "link.com", 2L * 60000, false, 1.0));
+            data.add(new Page(3L, "Facebook", "facebook.com", "link.com", 3L * 60000, true, 1.0));
+            data.add(new Page(4L, "IFBarbacena", "google.com", "link.com", 4L * 60000, false, 1.0));
+            data.add(new Page(5L, "GitHub", "google.com", "link.com", 5L * 60000, true, 1.0));
+            data.add(new Page(6L, "Uol", "google.com", "link.com", 6L * 60000, false, 1.0));
+            data.add(new Page(7L, "Terra", "google.com", "link.com", 7L * 60000, true, 1.0));
+            data.add(new Page(8L, "Gmail", "google.com", "link.com", 8L * 60000, false, 1.0));
         }
 
 
