@@ -42,7 +42,7 @@ public class Page {
         this.content = content;
     }
 
-    public Page(Long id, String title, String url, String imageSource, String content, Long timeInterval, boolean allowMobileConnection, Integer percentage, String httpRequestMethod) {
+    public Page(Long id, String title, String url, String imageSource, String content, Long timeInterval, boolean allowMobileConnection, Double percentage, String httpRequestMethod) {
         this.id = id;
         this.title = title;
         this.url = url;
