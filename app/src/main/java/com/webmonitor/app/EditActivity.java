@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class EditActivity extends AppCompatActivity {
 
     private long id;
+    private String radio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,9 @@ public class EditActivity extends AppCompatActivity {
         Integer percentage = Integer.parseInt(getIntent().getStringExtra("Porcentagem")); /// Percentage
         Integer dadosMoveis = Integer.parseInt(getIntent().getStringExtra("DataMobile")); /// AllowMobileConnection
 
+        radio = getIntent().getStringExtra("Radio");
+
+
         ((TextInputEditText) findViewById(R.id.url)).setText(site);
         ((TextInputEditText) findViewById(R.id.descricao)).setText(descricao);
         ((TextInputEditText) findViewById(R.id.minutes)).setText(String.format("%d", TimeUnit.MILLISECONDS.toMinutes(min)));
@@ -43,6 +49,7 @@ public class EditActivity extends AppCompatActivity {
         Switch aSwitch = (Switch)findViewById(R.id.dadosMoveisSwitch);
 
         aSwitch.setChecked(dados);
+
     }
 
     public void editPage(View view) {
@@ -54,6 +61,17 @@ public class EditActivity extends AppCompatActivity {
         TextInputEditText minutes = findViewById(R.id.minutes);
         TextInputEditText porcentagem = findViewById(R.id.percentage);
         Switch connection = findViewById(R.id.dadosMoveisSwitch);
+
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroupEdit);
+
+        int selectedId = radioGroup.getCheckedRadioButtonId();
+
+        RadioButton radioButton = (RadioButton) findViewById(selectedId);
+
+        if(radioButton.getText() != null && !radioButton.getText().toString().isEmpty())
+            radio = radioButton.getText().toString();
+
+        page.setHttpRequestMethod(radio);
 
         page.setId(id);
         page.setImageSource("");
@@ -72,6 +90,7 @@ public class EditActivity extends AppCompatActivity {
         page.setPercentage(percent);
 
         page.setAllowMobileConnection(connection.isChecked());
+
 
         /// Atualiza a página no banco de dados.
         db.update(page);

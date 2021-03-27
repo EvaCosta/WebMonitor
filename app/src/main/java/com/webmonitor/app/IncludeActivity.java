@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,11 +30,12 @@ public class IncludeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_include);
+
+
     }
 
     /// Faz o cadastro da página no banco.
     public void includePage(View view) throws IOException {
-
         Database db = new Database(this);
 
         Thread thread = new Thread(new Runnable() {
@@ -47,6 +50,11 @@ public class IncludeActivity extends AppCompatActivity {
                 TextInputEditText minutes = findViewById(R.id.minutes);
                 TextInputEditText porcentagem = findViewById(R.id.percentage);
                 CheckBox connection = findViewById(R.id.dadosMoveis);
+                RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio);
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+
+                RadioButton radioButton = (RadioButton) findViewById(selectedId);
 
                 /// Incluindo os dados recebidos pela tela de cadastro no objeto
                 page.setUrl(Objects.requireNonNull(url.getText()).toString());
@@ -73,6 +81,7 @@ public class IncludeActivity extends AppCompatActivity {
                     page.setPercentage(percent);
 
                     page.setAllowMobileConnection(connection.isSelected());
+                    page.setHttpRequestMethod(radioButton.getText().toString());
 
                     /// Insere a página no banco de dados.
                     db.insert(page);
