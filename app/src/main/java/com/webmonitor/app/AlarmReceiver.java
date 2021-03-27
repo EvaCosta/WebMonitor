@@ -73,7 +73,14 @@ public class AlarmReceiver extends BroadcastReceiver {
             @Override
             public void run() {
                 try {
-                    Document doc = Jsoup.connect(page.getUrl()).get();
+                    Document doc;
+
+                    if (page.getHttpRequestMethod().equals("GET")) {
+                        doc = Jsoup.connect(page.getUrl()).get();
+                    }
+                    else {
+                        doc = Jsoup.connect(page.getUrl()).post();
+                    }
                     String newContent = doc.body().text();
                     double similarity = (similarity(page.getContent(), newContent) * -100) + 100.0;
                     Log.i("Check", "Similarity: " + page.getUrl() +"(" + similarity + ", "+ page.getPercentage() +")");

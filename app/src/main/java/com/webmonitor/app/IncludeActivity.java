@@ -55,6 +55,8 @@ public class IncludeActivity extends AppCompatActivity {
                 int selectedId = radioGroup.getCheckedRadioButtonId();
 
                 RadioButton radioButton = (RadioButton) findViewById(selectedId);
+                page.setAllowMobileConnection(connection.isSelected());
+                page.setHttpRequestMethod(radioButton.getText().toString());
 
                 /// Incluindo os dados recebidos pela tela de cadastro no objeto
                 page.setUrl(Objects.requireNonNull(url.getText()).toString());
@@ -64,7 +66,13 @@ public class IncludeActivity extends AppCompatActivity {
                 }
 
                 try {
-                    document = Jsoup.connect(page.getUrl()).get();
+                    if (page.getHttpRequestMethod().equals("GET")) {
+                        document = Jsoup.connect(page.getUrl()).get();
+                    }
+                    else {
+                        document = Jsoup.connect(page.getUrl()).post();
+                    }
+
                     page.setTitle(document.title());
                     page.setContent(document.body().text());
 
@@ -79,9 +87,6 @@ public class IncludeActivity extends AppCompatActivity {
                     /// Porcentagem de alteração
                     Double percent = Double.parseDouble(Objects.requireNonNull(porcentagem.getText()).toString());
                     page.setPercentage(percent);
-
-                    page.setAllowMobileConnection(connection.isSelected());
-                    page.setHttpRequestMethod(radioButton.getText().toString());
 
                     /// Insere a página no banco de dados.
                     db.insert(page);
