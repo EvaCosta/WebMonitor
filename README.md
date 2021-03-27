@@ -2,7 +2,7 @@
 
 O Web Monitor é um app Android através dele é possível que usuários acompanhem atualizações em uma ou mais páginas web​. De forma que usuários serão informados sobre alterações no conteúdo das mesmas.
 
-<a href="https://evacosta.github.io/webmonitor/">WebMonitor Page</a>
+<a href="https://evacosta.github.io/WebMonitor/">WebMonitor Page</a>
 
 ## Sobre
 <p>Projeto desenvolvido no curso de <b>Tecnologia em Sistemas para Internet</b> pertencente ao <b>IF Sudeste MG Barbacena</b> na disciplina de <b>Linguagem de Programação Visual</b> ministrada pelo professor <a href="https://github.com/rafjaa">Rafael Alencar</a> em 2021.</p>
