@@ -31,13 +31,13 @@ public class EditActivity extends AppCompatActivity {
 
         id = Long.parseLong(getIntent().getStringExtra("ID"));
         Long min = Long.parseLong(getIntent().getStringExtra("Minutos")); /// TimeInterval
-        Integer percentage = Integer.parseInt(getIntent().getStringExtra("Porcentagem")); /// Percentage
+        Double percentage = Double.parseDouble(getIntent().getStringExtra("Porcentagem")); /// Percentage
         Integer dadosMoveis = Integer.parseInt(getIntent().getStringExtra("DataMobile")); /// AllowMobileConnection
 
         ((TextInputEditText) findViewById(R.id.url)).setText(site);
         ((TextInputEditText) findViewById(R.id.descricao)).setText(descricao);
         ((TextInputEditText) findViewById(R.id.minutes)).setText(String.format("%d", TimeUnit.MILLISECONDS.toMinutes(min)));
-        ((TextInputEditText) findViewById(R.id.percentage)).setText(percentage.toString());
+        ((TextInputEditText) findViewById(R.id.percentage)).setText(String.format("%1.2f", percentage));
 
         Boolean dados = dadosMoveis == 0 ? true : false;
         Switch aSwitch = (Switch)findViewById(R.id.dadosMoveisSwitch);
@@ -68,7 +68,7 @@ public class EditActivity extends AppCompatActivity {
         page.setTimeInterval(TimeUnit.MINUTES.toMillis(min));
 
         /// Porcentagem de alteração
-        Integer percent = Integer.parseInt(porcentagem.getText().toString());
+        Double percent = Double.parseDouble(porcentagem.getText().toString());
         page.setPercentage(percent);
 
         page.setAllowMobileConnection(connection.isChecked());

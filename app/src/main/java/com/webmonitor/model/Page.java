@@ -12,13 +12,13 @@ public class Page {
     private String imageSource;
     private String content;
     private Long timeInterval; //miliseconds
-    private Integer percentage;
+    private Double percentage;
     private Date lastTime;
     private Date lastUpdate;
     private boolean allowMobileConnection;
 
 
-    public Page(Long id, String title, String url, String imageSource, Long timeInterval, boolean allowMobileConnection, Integer percentage) {
+    public Page(Long id, String title, String url, String imageSource, Long timeInterval, boolean allowMobileConnection, Double percentage) {
         this.id = id;
         this.title = title;
         this.url = url;
@@ -29,7 +29,7 @@ public class Page {
         this.percentage = percentage;
     }
 
-    public Page(Long id, String title, String url, String imageSource, String content, Long timeInterval, boolean allowMobileConnection, Integer percentage) {
+    public Page(Long id, String title, String url, String imageSource, String content, Long timeInterval, boolean allowMobileConnection, Double percentage) {
         this.id = id;
         this.title = title;
         this.url = url;
@@ -97,11 +97,11 @@ public class Page {
 
     public boolean getAllowMobileConnection(){ return this.allowMobileConnection; }
 
-    public Integer getPercentage() {
+    public Double getPercentage() {
         return percentage;
     }
 
-    public void setPercentage(Integer percentage) {
+    public void setPercentage(Double percentage) {
         this.percentage = percentage;
     }
 

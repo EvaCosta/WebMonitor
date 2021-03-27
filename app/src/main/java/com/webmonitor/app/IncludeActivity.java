@@ -69,7 +69,7 @@ public class IncludeActivity extends AppCompatActivity {
                     page.setLastTime(new Date());
 
                     /// Porcentagem de alteração
-                    Integer percent = Integer.parseInt(Objects.requireNonNull(porcentagem.getText()).toString());
+                    Double percent = Double.parseDouble(Objects.requireNonNull(porcentagem.getText()).toString());
                     page.setPercentage(percent);
 
                     page.setAllowMobileConnection(connection.isSelected());
@@ -85,7 +85,7 @@ public class IncludeActivity extends AppCompatActivity {
                 }
                 catch (Exception e) {
                     e.printStackTrace();
-                    runOnUiThread(() -> Toast.makeText(view.getContext(), "URL inválida!", Toast.LENGTH_LONG).show());
+                    runOnUiThread(() -> Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_LONG).show());
                     return;
                 }
             }
